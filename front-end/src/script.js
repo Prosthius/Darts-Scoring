@@ -14,3 +14,22 @@ function init() {
                     </tr>`;
     document.getElementById('aroundWorldTableData').innerHTML = scoringTable;
 }
+const addPlayerBtn = (document.getElementById('addPlayerBtn'));
+addPlayerBtn.addEventListener('click', addPlayer);
+let playersHTML = '';
+let playersHTMLCounter = 1;
+function addPlayer() {
+    let playerName = document.getElementById('playerNameInp').value;
+    playersHTML += `<div class="input-group">
+                        <button type="button" class="btn btn-primary" id="player${playersHTMLCounter}">
+                            ${playerName}
+                        </button>
+                        <span class="input-group-text" id="player${playersHTMLCounter}Target">
+                            0
+                        </span>
+                    </div>`;
+    document.getElementById('players').innerHTML = playersHTML;
+    playersHTMLCounter++;
+}
+function playerTarget() {
+}
