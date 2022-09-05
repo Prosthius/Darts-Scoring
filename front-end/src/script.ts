@@ -19,6 +19,7 @@ function init()
     ).innerHTML = scoringTable;
 }
 
+// Needed for addPlayer()
 const addPlayerBtn: HTMLButtonElement = <HTMLButtonElement>(
     document.getElementById('addPlayerBtn')
   );

@@ -9,15 +9,19 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
         <link rel="stylesheet" href="./styles.css">
     </head>
-    <body>
+    <body class="py-3">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
         <script src="./src/script.js" async defer></script>
-        <div class="container">
+        <div class="container-fluid border">
             <div class="row">
-                <div class="col">
+                <div class="col-4">
                     <div class="input-group">
                         <button class="btn btn-outline-dark" type="button" id="addPlayerBtn">Add Player</button>
                         <input type="text" class="form-control" placeholder="Player Name" id="playerNameInp">                      
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Selected Player</span>
+                        <span class="input-group-text">Player Name</span>
                     </div>
 
                     <br />
@@ -42,24 +46,28 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col">
+
+                <!-- <div class="w-100 d-block d-md-block"></div> -->
+                <div class="w-100 d-block d-md-block"></div>
+                
+                <div class="col-5">
                     <div class="input-group">
                         <span class="input-group-text">Dart 1</span>
-                        <select class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <select id="hitMissDropdownOne" class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <option value="hit">Hit</option>
                             <option value="miss">Miss</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Dart 2</span>
-                        <select class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <select id="hitMissDropdownTwo" class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <option value="hit">Hit</option>
                             <option value="miss">Miss</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Dart 3</span>
-                        <select class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <select id="hitMissDropdownThree" class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <option value="hit">Hit</option>
                             <option value="miss">Miss</option>
                         </select>
@@ -72,7 +80,7 @@
                         Undo
                     </button>
                 </div>
-                <div class="col">
+                <div class="col-4 ps-0 offset-3">
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
