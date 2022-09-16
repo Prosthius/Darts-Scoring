@@ -14,6 +14,7 @@ function init() {
                     </tr>`;
     document.getElementById('aroundWorldTableData').innerHTML = scoringTable;
 }
+// Needed for addPlayer()
 const addPlayerBtn = (document.getElementById('addPlayerBtn'));
 addPlayerBtn.addEventListener('click', addPlayer);
 let playersHTML = '';
