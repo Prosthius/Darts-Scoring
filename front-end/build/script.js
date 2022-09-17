@@ -15,49 +15,55 @@ function init() {
                     </tr>`;
     document.getElementById('aroundWorldTableData').innerHTML = scoringTable;
 }
-// Needed for addPlayer()
 const addPlayerBtn = (document.getElementById('addPlayerBtn'));
 addPlayerBtn.addEventListener('click', addPlayer);
-let playersHTML = '';
-let playerCounter = 1;
+let playersHTMLArr = [];
+let playerID = 1;
 function addPlayer() {
     let playerName = document.getElementById('playerAddInp').value;
-    var player = new Player(playerName, playerCounter);
+    let player = new Player(playerName, playerID);
     players.push(player);
-    let playerID = players[players.length - 1].id;
-    playersHTML += `<div class="input-group" id="player${playerID}">
-                        <button type="button" class="btn btn-primary" id="player${playerID}Btn">
-                            ${playerName}
-                        </button>
-                        <span class="input-group-text" id="player${playerID}Target">
-                            0
-                        </span>
-                        <button class="btn btn-outline-dark" type="button" id="removePlayerBtn" value="${playerID}">
-                            Remove
-                        </button>
-                    </div>`;
+    playersHTMLArr.push(`<div class="input-group" id="playerDiv" value="${playerID}">
+                            <button type="button" class="btn btn-primary" id="playerSelectBtn" value="${playerID}">
+                                ${playerName}
+                            </button>
+                            <span class="input-group-text" id="player${playerID}Target">
+                                <!-- Prints the score of the most recently added player. It should work fine. -->
+                                ${players[players.length - 1].score}
+                            </span>
+                            <button class="btn btn-outline-dark" type="button" id="removePlayerBtn" value="${playerID}">
+                                Remove
+                            </button>
+                        </div>`);
+    playerID++;
+    drawPlayers();
+}
+function drawPlayers() {
+    let playersHTML = '';
+    for (let i in playersHTMLArr)
+        playersHTML += playersHTMLArr[i];
     document.getElementById('playersWrapper').innerHTML = playersHTML;
-    playerCounter++;
-    var removePlayerBtnWrapper = (document.getElementById('playersWrapper'));
-    console.log(removePlayerBtnWrapper);
-    removePlayerBtnWrapper.addEventListener('click', removePlayer);
-    {
-        // removePlayerBtnWrapper.addEventListener('target', isButton, false);
-        if (event.target.nodeName !== 'BUTTON')
-            return;
-        console.log(event?.target.id);
-    }
-    ;
 }
-function isButton() {
-    if (removePlayerBtnWrapper.target.nodeName !== 'BUTTON')
+function eventTarget(evt) {
+    return evt.target;
+}
+var removePlayerBtnWrapper = (document.getElementById('playersWrapper'));
+removePlayerBtnWrapper.addEventListener('click', removePlayer);
+function removePlayer(evt) {
+    // add alert asking if you want to remove player
+    let isButtonVar = eventTarget(evt);
+    if (isButtonVar.id !== 'removePlayerBtn')
         return;
-}
-function removePlayer() {
-    console.log('test');
-    let playerToRemove = document.getElementById('removePlayerBtn').value;
-    console.log(playerToRemove);
-    players.splice(playerToRemove, 1);
+    else {
+        for (let i in players) {
+            if (players[i].id === parseInt(isButtonVar.value)) {
+                players.splice(parseInt(i), 1);
+                playersHTMLArr.splice(parseInt(i), 1);
+                break;
+            }
+        }
+        drawPlayers();
+    }
 }
 function playerTarget() {
 }
