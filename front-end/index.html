@@ -11,22 +11,22 @@
     </head>
     <body class="py-3">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-        <script src="./build/script.js" async defer></script>
-        <div class="container-fluid border">
+        <script type="module" src="./build/script.js" defer></script>
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-4">
+                <div class="col">
                     <div class="input-group">
                         <button class="btn btn-outline-dark" type="button" id="addPlayerBtn">Add Player</button>
-                        <input type="text" class="form-control" placeholder="Player Name" id="playerNameInp">                      
+                        <input type="text" class="form-control" placeholder="Player Name" id="playerAddInp">
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Selected Player</span>
-                        <span class="input-group-text">Player Name</span>
+                        <span class="input-group-text">Insert Player Name</span>
                     </div>
 
                     <br />
                     
-                    <div id="players">
+                    <div id="playersWrapper">
                     </div>
 
                     <br />
@@ -45,12 +45,11 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
 
                 <!-- <div class="w-100 d-block d-md-block"></div> -->
                 <div class="w-100 d-block d-md-block"></div>
                 
-                <div class="col-5">
+                <!-- <div class="col-5"> -->
                     <div class="input-group">
                         <span class="input-group-text">Dart 1</span>
                         <select id="hitMissDropdownOne" class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
@@ -79,8 +78,8 @@
                     <button type="button" class="btn btn-danger" id="undoBtn">
                         Undo
                     </button>
-                </div>
-                <div class="col-4 ps-0 offset-3">
+                <!-- </div> -->
+                <!-- <div class="col-4 ps-0 offset-3"> -->
                     <table class="table table-dark table-striped-columns">
                         <thead>
                             <tr>
@@ -91,7 +90,7 @@
                         <tbody id="aroundWorldTableData">
                         </tbody>
                     </table>
-                </div>                
+                </div>
             </div>
         </div>
     </body>
