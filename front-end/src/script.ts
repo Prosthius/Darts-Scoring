@@ -1,3 +1,7 @@
+import { Player } from './modules/player.js';
+
+let players: Player[] = [];
+
 init();
 
 function init()
@@ -21,31 +25,66 @@ function init()
 
 // Needed for addPlayer()
 const addPlayerBtn: HTMLButtonElement = <HTMLButtonElement>(
-    document.getElementById('addPlayerBtn')
-  );
-  addPlayerBtn.addEventListener('click', addPlayer);
+    document.getElementById('addPlayerBtn'));
+addPlayerBtn.addEventListener('click', addPlayer);
 
 let playersHTML: string = '';
-let playersHTMLCounter: number = 1;
+let playerCounter: number = 1;
 
 function addPlayer()
 {
     let playerName: string = 
-    (document.getElementById('playerNameInp') as HTMLInputElement).value;
+        (document.getElementById('playerAddInp') as HTMLInputElement).value;
 
-    playersHTML += `<div class="input-group">
-                        <button type="button" class="btn btn-primary" id="player${playersHTMLCounter}">
+    var player: Player = new Player(playerName, playerCounter);
+    players.push(player);
+
+    let playerID: number = players[players.length - 1].id;
+
+    playersHTML += `<div class="input-group" id="player${playerID}">
+                        <button type="button" class="btn btn-primary" id="player${playerID}Btn">
                             ${playerName}
                         </button>
-                        <span class="input-group-text" id="player${playersHTMLCounter}Target">
+                        <span class="input-group-text" id="player${playerID}Target">
                             0
                         </span>
+                        <button class="btn btn-outline-dark" type="button" id="removePlayerBtn" value="${playerID}">
+                            Remove
+                        </button>
                     </div>`;
 
-    (document.getElementById('players') as HTMLDivElement
+    (document.getElementById('playersWrapper') as HTMLDivElement
     ).innerHTML = playersHTML;
 
-    playersHTMLCounter++;
+    playerCounter++;
+
+    var removePlayerBtnWrapper: HTMLButtonElement = <HTMLButtonElement>(
+        document.getElementById('playersWrapper'));
+
+    console.log(removePlayerBtnWrapper);
+
+    removePlayerBtnWrapper.addEventListener('click', removePlayer) => {
+        // removePlayerBtnWrapper.addEventListener('target', isButton, false);
+
+        if (event.target.nodeName !== 'BUTTON') return;
+
+        console.log(event?.target.id)
+    };
+}
+
+function isButton()
+{
+    if(removePlayerBtnWrapper.target.nodeName !== 'BUTTON') return;
+}
+
+function removePlayer()
+{
+    console.log('test');
+    let playerToRemove = 
+        (document.getElementById('removePlayerBtn') as HTMLInputElement).value;
+    console.log(playerToRemove);
+
+    players.splice(playerToRemove as unknown as number, 1);
 }
 
 function playerTarget()
