@@ -23,68 +23,77 @@ function init()
     ).innerHTML = scoringTable;
 }
 
-// Needed for addPlayer()
 const addPlayerBtn: HTMLButtonElement = <HTMLButtonElement>(
     document.getElementById('addPlayerBtn'));
 addPlayerBtn.addEventListener('click', addPlayer);
 
-let playersHTML: string = '';
-let playerCounter: number = 1;
+let playersHTMLArr: string[] = [];
+let playerID: number = 1;
 
 function addPlayer()
 {
-    let playerName: string = 
-        (document.getElementById('playerAddInp') as HTMLInputElement).value;
+    let playerName: string = (document.getElementById('playerAddInp') as HTMLInputElement).value;
+    let player: Player = new Player(playerName, playerID);
 
-    var player: Player = new Player(playerName, playerCounter);
     players.push(player);
 
-    let playerID: number = players[players.length - 1].id;
+    playersHTMLArr.push(`<div class="input-group" id="playerDiv" value="${playerID}">
+                            <button type="button" class="btn btn-primary" id="playerSelectBtn" value="${playerID}">
+                                ${playerName}
+                            </button>
+                            <span class="input-group-text" id="player${playerID}Target">
+                                <!-- Prints the score of the most recently added player. It should work fine. -->
+                                ${players[players.length - 1].score}
+                            </span>
+                            <button class="btn btn-outline-dark" type="button" id="removePlayerBtn" value="${playerID}">
+                                Remove
+                            </button>
+                        </div>`);
 
-    playersHTML += `<div class="input-group" id="player${playerID}">
-                        <button type="button" class="btn btn-primary" id="player${playerID}Btn">
-                            ${playerName}
-                        </button>
-                        <span class="input-group-text" id="player${playerID}Target">
-                            0
-                        </span>
-                        <button class="btn btn-outline-dark" type="button" id="removePlayerBtn" value="${playerID}">
-                            Remove
-                        </button>
-                    </div>`;
+    playerID++;
 
-    (document.getElementById('playersWrapper') as HTMLDivElement
-    ).innerHTML = playersHTML;
-
-    playerCounter++;
-
-    var removePlayerBtnWrapper: HTMLButtonElement = <HTMLButtonElement>(
-        document.getElementById('playersWrapper'));
-
-    console.log(removePlayerBtnWrapper);
-
-    removePlayerBtnWrapper.addEventListener('click', removePlayer) => {
-        // removePlayerBtnWrapper.addEventListener('target', isButton, false);
-
-        if (event.target.nodeName !== 'BUTTON') return;
-
-        console.log(event?.target.id)
-    };
+    drawPlayers();
 }
 
-function isButton()
+function drawPlayers()
 {
-    if(removePlayerBtnWrapper.target.nodeName !== 'BUTTON') return;
+    let playersHTML: string = '';
+
+    for (let i in playersHTMLArr) playersHTML += playersHTMLArr[i];
+
+    (document.getElementById('playersWrapper') as HTMLDivElement).innerHTML = playersHTML;
 }
 
-function removePlayer()
+function eventTarget(evt: any)
 {
-    console.log('test');
-    let playerToRemove = 
-        (document.getElementById('removePlayerBtn') as HTMLInputElement).value;
-    console.log(playerToRemove);
+    return evt.target;
+}
 
-    players.splice(playerToRemove as unknown as number, 1);
+var removePlayerBtnWrapper: HTMLButtonElement = <HTMLButtonElement>(
+    document.getElementById('playersWrapper'));
+
+removePlayerBtnWrapper.addEventListener('click', removePlayer);
+
+function removePlayer(evt: any)
+{
+    // add alert asking if you want to remove player
+
+    let isButtonVar = eventTarget(evt);
+
+    if (isButtonVar.id !== 'removePlayerBtn') return;
+    else
+    {
+        for (let i in players)
+        {
+            if (players[i].id as number === parseInt(isButtonVar.value))
+            {
+                players.splice(parseInt(i), 1);
+                playersHTMLArr.splice(parseInt(i), 1);
+                break;
+            }
+        }
+        drawPlayers();
+    }
 }
 
 function playerTarget()
