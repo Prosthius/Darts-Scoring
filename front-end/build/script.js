@@ -1,5 +1,7 @@
 import { Player } from './modules/player.js';
 let players = [];
+let playersHTMLArr = [];
+let playerID = 1;
 init();
 function init() {
     let scoringTable = '';
@@ -17,8 +19,6 @@ function init() {
 }
 const addPlayerBtn = (document.getElementById('addPlayerBtn'));
 addPlayerBtn.addEventListener('click', addPlayer);
-let playersHTMLArr = [];
-let playerID = 1;
 function addPlayer() {
     let playerName = document.getElementById('playerAddInp').value;
     let player = new Player(playerName, playerID);

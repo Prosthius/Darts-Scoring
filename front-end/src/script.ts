@@ -1,6 +1,8 @@
 import { Player } from './modules/player.js';
 
 let players: Player[] = [];
+let playersHTMLArr: string[] = [];
+let playerID: number = 1;
 
 init();
 
@@ -23,12 +25,10 @@ function init()
     ).innerHTML = scoringTable;
 }
 
+
 const addPlayerBtn: HTMLButtonElement = <HTMLButtonElement>(
     document.getElementById('addPlayerBtn'));
 addPlayerBtn.addEventListener('click', addPlayer);
-
-let playersHTMLArr: string[] = [];
-let playerID: number = 1;
 
 function addPlayer()
 {
@@ -68,6 +68,7 @@ function eventTarget(evt: any)
 {
     return evt.target;
 }
+
 
 var removePlayerBtnWrapper: HTMLButtonElement = <HTMLButtonElement>(
     document.getElementById('playersWrapper'));
