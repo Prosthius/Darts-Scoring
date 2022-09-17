@@ -77,27 +77,24 @@ removePlayerBtnWrapper.addEventListener('click', removePlayer);
 
 function removePlayer(evt: any)
 {
-    // add player name to alert
-    // e.g. 'Are you sure you want to remove ${player}?'
-    if(confirm('Are you sure you want to remove this player?'))
-    {
-        let isButtonVar = eventTarget(evt);
+    let isButtonVar = eventTarget(evt);
 
-        if (isButtonVar.id !== 'removePlayerBtn') return;
-        else
+    if (isButtonVar.id !== 'removePlayerBtn') return;
+    // Add player name to alert e.g. 'Are you sure you want to remove ${player}?'
+    else if (!confirm('Are you sure you want to remove this player?')) return;
+    else
+    {
+        for (let i in players)
         {
-            for (let i in players)
+            if (players[i].id as number === parseInt(isButtonVar.value))
             {
-                if (players[i].id as number === parseInt(isButtonVar.value))
-                {
-                    players.splice(parseInt(i), 1);
-                    playersHTMLArr.splice(parseInt(i), 1);
-                    break;
-                }
+                players.splice(parseInt(i), 1);
+                playersHTMLArr.splice(parseInt(i), 1);
+                break;
             }
-            drawPlayers();
         }
-    } else return;
+        drawPlayers();
+    }
 }
 
 function playerTarget()
